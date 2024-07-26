@@ -18,8 +18,8 @@ const createPost = async (req, res) => {
         const title = req.body?.title;
         const description = req.body?.description;
         const postType = req.body?.postType;
-        // const url=req.body.fileUrl;
-        const url = req.file?.filename;
+        const url=req.body.fileUrl;
+        console.log("req.file",req.file, url)
         let planInfo = JSON.parse(req.body.planInfo);
         var planPostCount = 0;
         planInfo.forEach((plan) => {

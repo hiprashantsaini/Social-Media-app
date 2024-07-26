@@ -3,26 +3,7 @@ const postController = require('../controllers/postController');
 const postRoute = express.Router();
 const auth = require('../authentication/auth');
 
-const multer = require('multer');
-const path = require('path');
-
-// Multer storage configuration
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, path.join(__dirname, '..', 'public/uploads'));
-    },
-    filename: function (req, file, cb) {
-        let name = Date.now() + '-' + file.originalname;
-        cb(null, name);
-    }
-});
-
-const upload = multer({ storage: storage});
-
-postRoute.post('/createpost',upload.single('media'), auth.isLogin, postController.createPost);
-
-
-// postRoute.post('/createpost', auth.isLogin, postController.createPost);
+postRoute.post('/createpost', auth.isLogin, postController.createPost);
 
 postRoute.post('/getposts', auth.isLogin, postController.getAllPosts);
 //delete post 
